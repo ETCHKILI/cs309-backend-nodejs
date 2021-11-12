@@ -55,12 +55,14 @@ router.post('/register', async function (req, res) {
         if (databaseErr(err, res)) {
             return
         }
-        if (queryRes.rows.length === 1) {
+        if (queryRes.rows.length !== 0) {
             res.render('register.html', {registerMessage: 'Username already exist!'})
         }
         if (queryRes.rows.length === 0) {
             // res.send("<script>alert('注册成功！');location.href='/login';</script>");
-            if (req.body.password !== req.body.cfmPassword) {
+            if (!req.body.username || !req.body.password) {
+                res.render('register.html', {registerMessage: 'Username or Password should not be empty'})
+            } else if (req.body.password !== req.body.cfmPassword) {
                 res.render('register.html', {registerMessage: 'Two passwords are not the same!'})
             } else {
                 await pool.query(sqlRegisterUsr, [req.body.username, req.body.password])
