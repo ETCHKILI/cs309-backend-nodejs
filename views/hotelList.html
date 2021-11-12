@@ -1,0 +1,86 @@
+{{extend './layouts/layout.html'}}
+
+{{block 'header'}}
+<style>
+    @import url('/public/css/hotelList.css');
+</style>
+{{/block}}
+
+{{block 'body'}}
+<form id="sch1" name="searchCondition" method="get">
+    <h1 id="h1">Search Condition</h1>
+    Date:
+    <label>
+        <input type="date" name="date"/>
+    </label>
+    Room Type:
+    <label>
+        <select name="type">
+            <option value="Any" selected>Any</option>
+            <option value="Standard Room">Standard Room</option>
+            <option value="King Bed">King Bed</option>
+            <option value="Family Room">Family Room</option>
+            <option value="Presidential Suite">Presidential Suite</option>
+        </select>
+    </label>
+    <br>
+    <input type="submit" value="Search"><br>
+</form>
+
+<table>
+    <caption id="a"><h2>Hotel List</h2></caption>
+    <tbody>
+    <tr>
+        <th>Record ID</th>
+        <th>Hotel Name</th>
+        <th>City</th>
+        <th>District</th>
+        <th>Date</th>
+        <th>Earliest check-in time</th>
+        <th>price</th>
+        <th>Room Type</th>
+        <th>Operation</th>
+    </tr>
+    {{each hotelList value}}
+    <tr>
+        <td>{{value.id}}</td>
+        <td onclick="submitRowID(this, '/hotel/update', 'get')" style="text-decoration: underline; color: blue">{{value.name}}</td>
+        <td>{{value.city}}</td>
+        <td>{{value.district}}</td>
+        <td>{{value.date}}</td>
+        <td>{{value.check_time}}</td>
+        <td>{{value.price}}</td>
+        <td>{{value.type}}</td>
+        <td><input type="button" value="Delete" onclick="submitRowID(this.parentNode, '/hotel', 'post')"></td>
+    </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+<p style="text-align: center">
+    <button id="button1" onclick="window.location.href = '/hotel/add'">ADD</button>
+</p>
+
+{{/block}}
+
+{{block 'script'}}
+<script>
+    function submitRowID(obj, url, method) {
+        if (obj == null) {return}
+
+        let tr = obj.parentNode;
+        let idNode = tr.cells[0]
+
+        let form = document.createElement('form');
+        form.action = url;
+        form.method = method;
+        let input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'id';
+        input.value = idNode.innerHTML;
+        form.appendChild(input);
+        document.body.append(form);
+        form.submit();
+    }
+</script>
+{{/block}}

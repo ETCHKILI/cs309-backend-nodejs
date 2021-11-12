@@ -1,0 +1,76 @@
+{{extend './layouts/layout.html'}}
+
+{{block 'header'}}
+<style>
+    @import url('/public/css/hotelList.css');
+</style>
+{{/block}}
+
+{{block 'body'}}
+<div id="div1">
+    <form id=form1 name="form1" method="post" onsubmit="submitAddID(this)">
+        <b>ID: {{id}}</b>
+        <br>
+        Hotel Name:
+        <label>
+            <input type="text" name="name" required="required" value={{name}}>
+        </label>
+        <br>
+        City:
+        <label>
+            <input type="text" name="city" required="required" value={{city}}>
+        </label>
+        <br>
+        District:
+        <label>
+            <input type="text" name="district" required="required" value={{district}}>
+        </label>
+        <br>
+        Date:
+        <label>
+            <input type="date" name="date" required="required" value={{date}}>
+        </label>
+        <br>
+        Earliest check-in time:
+        <label>
+            <input type="time" name="check_time" required="required" value={{check_time}}>
+        </label>
+        <br>
+        Price:
+        <label>
+            <input type="number" name="price" min="0" max="999999999" required="required" value={{price}}>
+        </label>
+        <br>
+        Room Type:
+        <label>
+            <select id="selectType" name="type" required="required">
+                <option id="Standard Room" value="Standard Room" >Standard Room</option>
+                <option id="King Bed" value="King Bed" >King Bed</option>
+                <option id="Family Room" value="Family Room" >Family Room</option>
+                <option id="Presidential Suite" value="Presidential Suite" >Presidential Suite</option>
+            </select>
+        </label>
+        <br>
+        <input type="submit" value="Update Hotel"><br>
+    </form>
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script>
+    const id = "{{id}}";
+
+    const option = document.getElementById("{{type}}")
+    option.selected = true
+
+    function submitAddID(obj) {
+        let input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'id';
+        input.value = "{{id}}";
+        obj.appendChild(input)
+    }
+
+</script>
+{{/block}}
+

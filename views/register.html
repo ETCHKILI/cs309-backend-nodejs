@@ -1,0 +1,40 @@
+{{extend './layouts/layout.html'}}
+
+{{block 'header'}}
+<style>
+    @import url('/public/css/hotelList.css');
+</style>
+{{/block}}
+
+{{block 'body'}}
+<div class="father">
+<div class="flex">
+    <form name="input" action="/register" method="POST">
+        username:
+        <label>
+            <input type="text" name="username">
+        </label>
+        <br>
+        password:
+        <label>
+            <input type="password" name="password">
+        </label>
+        <br>
+        confirm password:
+        <label>
+            <input type="password" name="cfmPassword">
+        </label>
+        <br>
+        <input type="submit" value="Register" />
+        <br>
+        {{if registerMessage}}
+            <font color="#dc143c">
+            {{registerMessage}}
+            <br>
+            </font>
+        {{/if}}
+        <a href="/login">Login now</a>
+    </form>
+</div>
+</div>
+{{/block}}

@@ -1,0 +1,56 @@
+{{extend './layouts/layout.html'}}
+
+{{block 'header'}}
+<style>
+    @import url('/public/css/hotelList.css');
+</style>
+{{/block}}
+
+{{block 'body'}}
+<div id="div1">
+    <form id=form1 name="form1" method="post">
+        Hotel Name:
+        <label>
+            <input type="text" name="name" required="required"/>
+        </label>
+        <br/>
+        City:
+        <label>
+            <input type="text" name="city" required="required"/>
+        </label>
+        <br/>
+        District:
+        <label>
+            <input type="text" name="district" required="required"/>
+        </label>
+        <br/>
+        Date:
+        <label>
+            <input type="date" name="date" required="required"/>
+        </label>
+        <br/>
+        Earliest check-in time:
+        <label>
+            <input type="time" name="check_time" required="required"/>
+        </label>
+        <br>
+        Price:
+        <label>
+            <input type="number" name="price" min="0" max="999999999" required="required">
+        </label>
+        <br>
+        Room Type:
+        <label>
+            <select name="type" required="required">
+                <option value="Standard Room" selected>Standard Room</option>
+                <option value="King Bed">King Bed</option>
+                <option value="Family Room">Family Room</option>
+                <option value="Presidential Suite">Presidential Suite</option>
+            </select>
+        </label>
+        <br>
+        <input type="submit" value="Add Hotel"><br>
+    </form>
+</div>
+{{/block}}
+

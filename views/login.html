@@ -1,0 +1,41 @@
+{{extend './layouts/layout.html'}}
+
+{{block 'header'}}
+<style>
+    @import url('/public/css/hotelList.css');
+</style>
+{{/block}}
+
+{{block 'body'}}
+<div class="father">
+<div class="flex">
+    <form name="input" method="POST">
+        username:
+        <label>
+            <input type="text" name="username" required value="{{ckUsr}}"
+                   oninvalid="setCustomValidity('username shouldn\'t be null')"
+                   oninput="setCustomValidity('')"
+            >
+        </label>
+        <br>
+        password:
+        <label>
+            <input type="password" name="password" required
+                   oninvalid="setCustomValidity('username shouldn\'t be null')"
+                   oninput="setCustomValidity('')"
+            >
+        </label>
+        <br>
+        <input type="submit" value="Login" />
+        <br>
+        {{if loginMessage}}
+            <font color="#dc143c">
+            {{loginMessage}}
+            <br>
+            </font>
+        {{/if}}
+        <a href="/register">Register a user now</a>
+    </form>
+</div>
+</div>
+{{/block}}
